@@ -1,12 +1,14 @@
 import json
+import os
 from collections import defaultdict as dd
 
+current_folder = os.path.dirname(__file__)
 
 class SloveneG2P:
 
     def __init__(self, representation_option, phoneme_set_option, output_option):
-        self.phoneme_set_file_path = "./resources/SloveneG2P_phoneme_set.json"
-        self.conversion_file_path = "./resources/table_of_obstruent_conversions.tsv"
+        self.phoneme_set_file_path = os.path.join(current_folder, "resources/SloveneG2P_phoneme_set.json")
+        self.conversion_file_path = os.path.join(current_folder, "resources/table_of_obstruent_conversions.tsv")
         self.representation_option = representation_option
         self.phoneme_set_option = phoneme_set_option
 
@@ -32,7 +34,7 @@ class SloveneG2P:
 
         # GET LIST OF SCHWA RULES
         self.set_schwa_combinations = set()
-        file_with_schwa_rules = open("./resources/schwa_rules.tsv", "r", encoding="UTF-8").readlines()
+        file_with_schwa_rules = open(os.path.join(current_folder, "resources/schwa_rules.tsv"), "r", encoding="UTF-8").readlines()
         for line in file_with_schwa_rules:
             all_info = line.strip("\n").split("\t")
             morph_code = all_info[0]
@@ -40,7 +42,6 @@ class SloveneG2P:
             relevant_msds = all_info[2]
             for relevant_msd in relevant_msds.split(", "):
                 schwa_combination = f"{morph_code} ~ {relevant_msd}"
-                print(schwa_combination)
                 self.set_schwa_combinations.add(schwa_combination)
 
     # RESOURCE FUNCTION - LIST OF VOWEL GRAPHEMES
