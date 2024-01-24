@@ -6,6 +6,19 @@ current_folder = os.path.dirname(__file__)
 
 class SloveneG2P:
 
+    def __init__(self):
+        self.ipa_converter = SloveneG2PBase("ipa_symbol", "cjvt_ipa_detailed_representation", "phoneme_string")
+        self.sampa_converter = SloveneG2PBase("sampa_symbol", "cjvt_sampa_detailed_representation", "phoneme_string")
+
+    def ipa(self, word, msd, mpc):
+        return self.ipa_converter.convert_to_phonetic_transcription(word, msd, mpc)
+
+    def sampa(self, word, msd, mpc):
+        return self.sampa_converter.convert_to_phonetic_transcription(word, msd, mpc)
+
+
+class SloveneG2PBase:
+
     def __init__(self, representation_option, phoneme_set_option, output_option):
         self.phoneme_set_file_path = os.path.join(current_folder, "resources/SloveneG2P_phoneme_set.json")
         self.conversion_file_path = os.path.join(current_folder, "resources/table_of_obstruent_conversions.tsv")
