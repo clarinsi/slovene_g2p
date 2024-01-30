@@ -1,0 +1,4 @@
+slovene_g2p.egg-info/*
+slovene_g2p/slovene_g2p.egg-info/*
+build
+dist
