@@ -11,7 +11,7 @@ with open("README.md", "r", encoding="utf-8") as readme_file:
 
 setup(
     name='slovene_g2p',
-    version='0.0.7',
+    version='0.0.9',
     author = "Peter Pisljar",
     description = "rule based slovenian g2p",
     long_description=README,
